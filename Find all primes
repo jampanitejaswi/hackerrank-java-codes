@@ -1,0 +1,46 @@
+import java.util.*;
+
+public class PrimeSubstrings {
+    
+    public static boolean isPrime(int num) {
+        if (num <= 1) return false;
+        if (num == 2) return true;
+        if (num % 2 == 0) return false;
+        
+        for (int i = 3; i * i <= num; i += 2) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.next();
+        
+        Set<Integer> primes = new TreeSet<>();
+        
+        for (int i = 0; i < input.length(); i++) {
+            for (int j = i + 1; j <= input.length(); j++) {
+                String substr = input.substring(i, j);
+                
+                if (substr.length() > 1 && substr.charAt(0) == '0') {
+                    continue;
+                }
+                
+                try {
+                    int num = Integer.parseInt(substr);
+                    if (isPrime(num)) {
+                        primes.add(num);
+                    }
+                } catch (NumberFormatException e) {
+                }
+            }
+        }
+        
+        for (int prime : primes) {
+            System.out.print(prime + " ");
+        }
+    }
+}
