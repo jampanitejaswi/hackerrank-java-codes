@@ -1,0 +1,43 @@
+import java.util.Scanner;
+
+public class ClosestDivisibleNumber {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        
+        if (m == 0) {
+            System.out.println("Invalid input: m cannot be zero");
+            return;
+        }
+        
+        if (n % m == 0) {
+            System.out.println(n);
+            return;
+        }
+        
+        int candidate1 = (n / m) * m;
+        int candidate2;
+        
+        if (n * m > 0) { 
+            candidate2 = candidate1 + m;
+        } else { 
+            candidate2 = candidate1 - m;
+        }
+        
+        int diff1 = Math.abs(n - candidate1);
+        int diff2 = Math.abs(n - candidate2);
+        
+        if (diff1 < diff2) {
+            System.out.println(candidate1);
+        } else if (diff2 < diff1) {
+            System.out.println(candidate2);
+        } else {
+            if (Math.abs(candidate1) > Math.abs(candidate2)) {
+                System.out.println(candidate1);
+            } else {
+                System.out.println(candidate2);
+            }
+        }
+    }
+}
