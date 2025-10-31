@@ -1,0 +1,56 @@
+import java.util.*;
+
+public class AlternateEvenOdd {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        
+        List<Integer> evenDigits = new ArrayList<>();
+        List<Integer> oddDigits = new ArrayList<>();
+        
+        int specialCharCount = 0;
+        
+        for (char ch : input.toCharArray()) {
+            if (Character.isDigit(ch)) {
+                int digit = Character.getNumericValue(ch);
+                if (digit % 2 == 0) {
+                    evenDigits.add(digit);
+                } else {
+                    oddDigits.add(digit);
+                }
+            } else if (!Character.isLetter(ch) && !Character.isWhitespace(ch)) {
+                specialCharCount++;
+            }
+        }
+        
+        StringBuilder result = new StringBuilder();
+        
+        if (specialCharCount % 2 == 0) {
+            int evenIndex = 0, oddIndex = 0;
+            while (evenIndex < evenDigits.size() || oddIndex < oddDigits.size()) {
+                if (evenIndex < evenDigits.size()) {
+                    result.append(evenDigits.get(evenIndex));
+                    evenIndex++;
+                }
+                if (oddIndex < oddDigits.size()) {
+                    result.append(oddDigits.get(oddIndex));
+                    oddIndex++;
+                }
+            }
+        } else {
+            int evenIndex = 0, oddIndex = 0;
+            while (evenIndex < evenDigits.size() || oddIndex < oddDigits.size()) {
+                if (oddIndex < oddDigits.size()) {
+                    result.append(oddDigits.get(oddIndex));
+                    oddIndex++;
+                }
+                if (evenIndex < evenDigits.size()) {
+                    result.append(evenDigits.get(evenIndex));
+                    evenIndex++;
+                }
+            }
+        }
+        
+        System.out.println(result.toString());
+    }
+}
